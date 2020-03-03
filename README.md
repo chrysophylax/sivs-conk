@@ -7,7 +7,7 @@ You may need to have the PNG be even in height and width although who knows /shr
 
 ## how-to run
   * have java installed and running (this differs depending on the linux)
-  * download the latest `sivs.jar` file.
+  * download the latest `sivs.jar` file from [releases](https://github.com/chrysophylax/sivs-conk/releases "sivs-conk releases on GitHub").
   * run the following command
    `java -jar sivs.jar`
   * read instructions :-)
