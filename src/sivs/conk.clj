@@ -18,19 +18,20 @@
    ])
 
 (defn prep-ffmpeg [ffmpeg]
-    (with-open [in (io/input-stream (io/resource "ws/schild/jave/nativebin/ffmpeg-amd64"))]
-      (io/copy in (io/file ffmpeg))
-      (fs/chmod "+x" ffmpeg)
-      true))
+  (with-open [in (io/input-stream (io/resource "ws/schild/jave/nativebin/ffmpeg-amd64"))]
+    (io/copy in (io/file ffmpeg))
+    (fs/chmod "+x" ffmpeg)
+    true))
 
 (defn build-args [sound image target]
- (list "-y" "-loglevel" "info" "-loop" "1" "-i" image
-   "-i" sound
-   "-c:v" "libvpx-vp9"
-   "-c:a" "copy"
-   "-f" "webm"
-   "-shortest"
-   target)
+  (list "-y" "-loglevel" "info" "-loop" "1" "-framerate" "1" "-i" image
+        "-i" sound
+        "-c:v" "libvpx-vp9"
+        "-r" "10"
+        "-c:a" "copy"
+        "-f" "webm"
+        "-shortest"
+        target)
   )
 
 (defn process-video [path args]
@@ -46,7 +47,7 @@
   )
 
 (defn exec [& {:keys [image audio target]}]
-    (let [ffmpeg "/tmp/ffmpeg64"]
+  (let [ffmpeg "/tmp/ffmpeg64"]
     (println (str "input-img=" image ",input-snd=" audio ",target=" target))
     (cond
       (prep-ffmpeg ffmpeg) (do
@@ -64,4 +65,4 @@
     (println options)
     (cond
       (and (some? image)(some? audio)) (exec :image image :audio audio :target target)
-    :else (println "no args given!"))))
+      :else (println "no args given!"))))
