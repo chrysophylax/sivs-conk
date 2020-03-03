@@ -20,4 +20,5 @@ You may need to have the PNG be even in height and width although who knows /shr
 ## thanks to
   * everyone who makes clojure so useful
   * ffmpeg people
-  * @a.schild and his helpful jade2 library with a static ffmpeg
+  * @a.schild and his helpful jave2 library with a static ffmpeg
+  * the hero who compiles ffmpeg statically
