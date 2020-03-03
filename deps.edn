@@ -1,0 +1,13 @@
+{:paths ["src" "classes"]
+ :deps {
+        ws.schild/jave-nativebin-linux64 {:mvn/version "2.7.3"}
+        org.clojure/core.async {:mvn/version "1.0.567"}
+        org.clojure/tools.cli {:mvn/version "1.0.194"}
+        clj-commons/conch {:mvn/version "0.9.2"}
+        clj-commons/fs {:mvn/version "1.5.1"}}
+ :aliases {
+           :aot {
+                 :main-opts ["-e" "(compile 'sivs.conk)"]}
+           :uberjar {:extra-deps {uberdeps {:mvn/version "0.1.8"}}
+                     :main-opts ["-m" "uberdeps.uberjar"]}}
+ }
