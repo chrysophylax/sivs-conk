@@ -31,22 +31,20 @@
         "-c:a" "copy"
         "-f" "webm"
         "-shortest"
-        target)
-  )
+        target))
 
 (defn process-video [path args]
   (println "begin processing attempt")
   (conch/let-programs [ffmpeg path]
                       (cond
                         (nil? args) (do
-                                        (println "invalid config for video encoder. printing version..." )
-                                        (print (ffmpeg "-version")))
-                        :else (print (apply ffmpeg args))))
+                                      (println "invalid config for video encoder. printing version..." )
+                                      (print (ffmpeg "-version")))
+                        :else (print (:in (apply ffmpeg args )))))
   (println "end processing attempt")
-  (System/exit 0)
-  )
+  (System/exit 0))
 
-(defn exec [& {:keys [image audio target]}]
+(defn exec [image audio target]
   (let [ffmpeg "/tmp/ffmpeg64"]
     (println (str "input-img=" image ",input-snd=" audio ",target=" target))
     (cond
@@ -64,5 +62,5 @@
     (println summary)
     (println options)
     (cond
-      (and (some? image)(some? audio)) (exec :image image :audio audio :target target)
+      (and (some? image)(some? audio)) (exec image audio target)
       :else (println "no args given!"))))
